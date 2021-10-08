@@ -1,4 +1,3 @@
-![Starboard logo](docs/images/starboard-logo.png)
 
 Starboard integrates security tools into the Kubernetes environment, so that users can find and view the risks that relate to different resources in a Kubernetes-native way.
 
