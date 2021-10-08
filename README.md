@@ -63,4 +63,22 @@ https://github.com/aquasecurity/starboard
     
     `kubectl get all; kubectl get all -n istio-system; kubectl get all -n kube-system`
     
-4) **four**
+4) **Get Starboard**
+
+    https://github.com/aquasecurity/starboard
+    
+5) **Install Starboard CLI from binary releases**
+- Download your desired version https://github.com/aquasecurity/starboard/releases
+- Unpack it (tar -zxvf starboard_linux_x86_64.tar.gz)
+- Find the starboard binary in the unpacked directory, and move it to its desired destination (In my case $sudo mv starboard_darwin_x86_64/starboard /bin)
+
+6) **Scanning Workloads**
+
+    The easiest way to get started with Starboard is to use an imperative starboard command, which allows ad hoc scanning of Kubernetes workloads deployed in your cluster.
+    To begin with, execute the following one-time setup command:
+
+    `starboard init`
+
+    The `init` subcommand creates the `starboard namespace, in which Starboard executes Kubernetes jobs to perform scans. It also sends custom security resources definitions to the Kubernetes API:
+    
+    **There's also a `starboard cleanup` subcommand, which can be used to remove all resources created by Starboard.** 
