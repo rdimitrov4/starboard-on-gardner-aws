@@ -1,4 +1,23 @@
-# starboard-on-gardner-aws
+![Starboard logo](docs/images/starboard-logo.png)
+
+Starboard integrates security tools into the Kubernetes environment, so that users can find and view the risks that relate to different resources in a Kubernetes-native way.
+
+https://github.com/aquasecurity/starboard
+
+### Why use Starboard:
+
+- Vulnerability information in your running workloads, scanned using Trivy
+- Workload audits provided by Fairwinds Polaris
+- CIS benchmark results per node provided by kube-bench
+- Pen-testing results provided by kube-hunter
+
+### Starboard can be run in two different modes:
+
+- As a command, so you can trigger scans and view the risks in a kubectl-compatible way or as part of your CI/CD pipeline.
+- As an operator to automatically update security reports in response to workload and other changes on a Kubernetes
+  cluster - for example, initiating a vulnerability scan when a new pod is started.
+
+#
 
 1) **Connect the local kubectl on current shell instance to the Gardner cluster with a pre-generated token.**
 
