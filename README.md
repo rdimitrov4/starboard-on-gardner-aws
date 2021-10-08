@@ -45,4 +45,4 @@
     
     `kubectl get all; kubectl get all -n istio-system; kubectl get all -n kube-system`
     
-4) ** asd **
+4) **four**
