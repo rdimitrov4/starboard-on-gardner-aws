@@ -99,6 +99,15 @@ https://github.com/aquasecurity/starboard
     To confirm that the operator is running, check the number of replicas created by the starboard-operator Deployment in the starboard-operator namespace:
     
     `$ kubectl get deployment -n starboard-operator`
+    
+    **You can uninstall the operator with the following command:**
+    
+    `kubectl delete -f https://raw.githubusercontent.com/aquasecurity/starboard/v0.12.0/deploy/static/06-starboard-operator.deployment.yaml \
+    -f https://raw.githubusercontent.com/aquasecurity/starboard/v0.12.0/deploy/static/05-starboard-operator.config.yaml \
+    -f https://raw.githubusercontent.com/aquasecurity/starboard/v0.12.0/deploy/static/04-starboard-operator.clusterrolebinding.yaml \
+    -f https://raw.githubusercontent.com/aquasecurity/starboard/v0.12.0/deploy/static/03-starboard-operator.clusterrole.yaml \
+    -f https://raw.githubusercontent.com/aquasecurity/starboard/v0.12.0/deploy/static/02-starboard-operator.sa.yaml \
+    -f https://raw.githubusercontent.com/aquasecurity/starboard/v0.12.0/deploy/static/01-starboard-operator.ns.yaml`
 
 8) **Scanning Workloads**
 
