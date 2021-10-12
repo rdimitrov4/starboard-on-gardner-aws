@@ -72,7 +72,35 @@ https://github.com/aquasecurity/starboard
 - Unpack it (tar -zxvf starboard_linux_x86_64.tar.gz)
 - Find the starboard binary in the unpacked directory, and move it to its desired destination (In my case $sudo mv starboard_darwin_x86_64/starboard /bin)
 
-6) **Scanning Workloads**
+6) **Install Starboard Operator**
+
+     Send custom resource definitions to the Kubernetes API:
+
+    `kubectl apply -f https://raw.githubusercontent.com/aquasecurity/starboard/v0.12.0/deploy/crd/vulnerabilityreports.crd.yaml \
+    -f https://raw.githubusercontent.com/aquasecurity/starboard/v0.12.0/deploy/crd/configauditreports.crd.yaml \
+    -f https://raw.githubusercontent.com/aquasecurity/starboard/v0.12.0/deploy/crd/clusterconfigauditreports.crd.yaml \
+    -f https://raw.githubusercontent.com/aquasecurity/starboard/v0.12.0/deploy/crd/ciskubebenchreports.crd.yaml`
+  
+     Send the following Kubernetes objects definitions to the Kubernetes API:
+
+    `kubectl apply -f https://raw.githubusercontent.com/aquasecurity/starboard/v0.12.0/deploy/static/01-starboard-operator.ns.yaml \
+    -f https://raw.githubusercontent.com/aquasecurity/starboard/v0.12.0/deploy/static/02-starboard-operator.sa.yaml \
+    -f https://raw.githubusercontent.com/aquasecurity/starboard/v0.12.0/deploy/static/03-starboard-operator.clusterrole.yaml \
+    -f https://raw.githubusercontent.com/aquasecurity/starboard/v0.12.0/deploy/static/04-starboard-operator.clusterrolebinding.yaml`
+
+     (Optional) Configure Starboard by creating the starboard ConfigMap and the starboard secret in the starboard-operator namespace.
+    
+    `kubectl apply -f https://raw.githubusercontent.com/aquasecurity/starboard/v0.12.0/deploy/static/05-starboard-operator.config.yaml`
+    
+     Finally, create the starboard-operator Deployment in the starboard-operator namespace to start the operator's pod:
+     
+    `kubectl apply -f https://raw.githubusercontent.com/aquasecurity/starboard/v0.12.0/deploy/static/06-starboard-operator.deployment.yaml`
+    
+    To confirm that the operator is running, check the number of replicas created by the starboard-operator Deployment in the starboard-operator namespace:
+    
+    `$ kubectl get deployment -n starboard-operator`
+
+8) **Scanning Workloads**
 
     The easiest way to get started with Starboard is to use an imperative starboard command, which allows ad hoc scanning of Kubernetes workloads deployed in your cluster.
     To begin with, execute the following one-time setup command:
