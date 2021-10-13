@@ -180,5 +180,5 @@ https://github.com/aquasecurity/starboard
     Once you scanned the nginx Deployment for vulnerabilities and checked its configuration you can generate an HTML report of identified risks:
 
     `starboard get report deployment/nginx > nginx.deploy.html`
-
-    `open nginx.deploy.html`
+    
+    The file is saved at the `/home/user` directroy.
