@@ -176,3 +176,9 @@ https://github.com/aquasecurity/starboard
     NAME               SCANNER   AGE   DANGER   WARNING   PASS
     deployment-nginx   Polaris   5s    0        8         9
     ```
+
+    Once you scanned the nginx Deployment for vulnerabilities and checked its configuration you can generate an HTML report of identified risks:
+
+    `starboard get report deployment/nginx > nginx.deploy.html`
+
+    `open nginx.deploy.html`
