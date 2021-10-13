@@ -130,3 +130,49 @@ https://github.com/aquasecurity/starboard
     ```
     
     **There's also a `starboard cleanup` subcommand, which can be used to remove all resources created by Starboard.** 
+
+    #
+    
+    As an example let's run in the current namespace an old version of nginx that we know has vulnerabilities:
+    
+    `kubectl create deployment nginx --image nginx:1.16`
+    
+    Run the vulnerability scanner to generate vulnerability reports:
+
+    `starboard scan vulnerabilityreports deployment/nginx`
+    
+    Behind the scenes, by default this uses Trivy in Standalone mode to identify vulnerabilities in the container images associated with the specified deployment.     Once this has been done, you can retrieve the latest vulnerability reports for this workload:
+
+    `starboard get vulnerabilities deployment/nginx -o yaml`
+    
+    #
+    **Note**
+    
+    Starboard relies on labels and label selectors to associate vulnerability reports with the specified Deployment. For a Deployment with N container images         Starboard creates N instances of vulnerabilityreports.aquasecurity.github.io resources. In addition, each instance has the starboard.container.name label to       associate it with a particular container's image. This means that the same data retrieved by the starboard get vulnerabilities subcommand can be fetched with     the standard kubectl get command:
+    ```
+    $ kubectl get vulnerabilityreports -o wide \
+    >  -l starboard.resource.kind=Deployment,starboard.resource.name=nginx
+    NAME                     REPOSITORY      TAG    SCANNER   AGE    CRITICAL   HIGH   MEDIUM   LOW   UNKNOWN
+    deployment-nginx-nginx   library/nginx   1.16   Trivy     2m6s   3          40     24       90    0
+    ```
+    #
+    
+    Llet's take the same nginx Deployment and audit its Kubernetes configuration. As you remember we've created it with the kubectl create deployment command which applies the default settings to the deployment descriptors. However, we also know that in Kubernetes the defaults are usually the least secure.
+
+    Run the scanner to audit the configuration using Polaris, which is the default configuration checker:
+
+    `starboard scan configauditreports deployment/nginx`
+    
+    
+    Retrieve the configuration audit report:
+    
+    `starboard get configaudit deployment/nginx -o yaml`
+    
+    or
+    
+    ```
+    $ kubectl get configauditreport -o wide \
+    >  -l starboard.resource.kind=Deployment,starboard.resource.name=nginx
+    NAME               SCANNER   AGE   DANGER   WARNING   PASS
+    deployment-nginx   Polaris   5s    0        8         9
+    ```
