@@ -118,4 +118,15 @@ https://github.com/aquasecurity/starboard
 
     The `init` subcommand creates the `starboard` namespace, in which Starboard executes Kubernetes jobs to perform scans. It also sends custom security resources definitions to the Kubernetes API:
     
+    ```
+    $ kubectl api-resources --api-group aquasecurity.github.io
+    
+    NAME                        SHORTNAMES           APIVERSION                        NAMESPACED   KIND
+    ciskubebenchreports         kubebench            aquasecurity.github.io/v1alpha1   false        CISKubeBenchReport
+    clusterconfigauditreports   clusterconfigaudit   aquasecurity.github.io/v1alpha1   false        ClusterConfigAuditReport
+    configauditreports          configaudit          aquasecurity.github.io/v1alpha1   true         ConfigAuditReport
+    kubehunterreports           kubehunter           aquasecurity.github.io/v1alpha1   false        KubeHunterReport
+    vulnerabilityreports        vuln,vulns           aquasecurity.github.io/v1alpha1   true         VulnerabilityReport
+    ```
+    
     **There's also a `starboard cleanup` subcommand, which can be used to remove all resources created by Starboard.** 
