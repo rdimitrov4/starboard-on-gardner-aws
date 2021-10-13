@@ -74,40 +74,46 @@ https://github.com/aquasecurity/starboard
 
 6) **Install Starboard Operator**
 
-     Send custom resource definitions to the Kubernetes API:
+     1) Send custom resource definitions to the Kubernetes API:
 
-    `kubectl apply -f https://raw.githubusercontent.com/aquasecurity/starboard/v0.12.0/deploy/crd/vulnerabilityreports.crd.yaml \
+     ```
+     kubectl apply -f https://raw.githubusercontent.com/aquasecurity/starboard/v0.12.0/deploy/crd/vulnerabilityreports.crd.yaml \
     -f https://raw.githubusercontent.com/aquasecurity/starboard/v0.12.0/deploy/crd/configauditreports.crd.yaml \
     -f https://raw.githubusercontent.com/aquasecurity/starboard/v0.12.0/deploy/crd/clusterconfigauditreports.crd.yaml \
-    -f https://raw.githubusercontent.com/aquasecurity/starboard/v0.12.0/deploy/crd/ciskubebenchreports.crd.yaml`
+    -f https://raw.githubusercontent.com/aquasecurity/starboard/v0.12.0/deploy/crd/ciskubebenchreports.crd.yaml
+    ```
   
-     Send the following Kubernetes objects definitions to the Kubernetes API:
+     2) Send the following Kubernetes objects definitions to the Kubernetes API:
 
-    `kubectl apply -f https://raw.githubusercontent.com/aquasecurity/starboard/v0.12.0/deploy/static/01-starboard-operator.ns.yaml \
+     ```
+     kubectl apply -f https://raw.githubusercontent.com/aquasecurity/starboard/v0.12.0/deploy/static/01-starboard-operator.ns.yaml \
     -f https://raw.githubusercontent.com/aquasecurity/starboard/v0.12.0/deploy/static/02-starboard-operator.sa.yaml \
     -f https://raw.githubusercontent.com/aquasecurity/starboard/v0.12.0/deploy/static/03-starboard-operator.clusterrole.yaml \
-    -f https://raw.githubusercontent.com/aquasecurity/starboard/v0.12.0/deploy/static/04-starboard-operator.clusterrolebinding.yaml`
+    -f https://raw.githubusercontent.com/aquasecurity/starboard/v0.12.0/deploy/static/04-starboard-operator.clusterrolebinding.yaml
+    ```
 
-     (Optional) Configure Starboard by creating the starboard ConfigMap and the starboard secret in the starboard-operator namespace.
+     3) (Optional) Configure Starboard by creating the starboard ConfigMap and the starboard secret in the starboard-operator namespace.
     
     `kubectl apply -f https://raw.githubusercontent.com/aquasecurity/starboard/v0.12.0/deploy/static/05-starboard-operator.config.yaml`
     
-     Finally, create the starboard-operator Deployment in the starboard-operator namespace to start the operator's pod:
+     4) Finally, create the starboard-operator Deployment in the starboard-operator namespace to start the operator's pod:
      
     `kubectl apply -f https://raw.githubusercontent.com/aquasecurity/starboard/v0.12.0/deploy/static/06-starboard-operator.deployment.yaml`
     
-    To confirm that the operator is running, check the number of replicas created by the starboard-operator Deployment in the starboard-operator namespace:
+    5) To confirm that the operator is running, check the number of replicas created by the starboard-operator Deployment in the starboard-operator namespace:
     
     `$ kubectl get deployment -n starboard-operator`
     
     **You can uninstall the operator with the following command:**
     
-    `kubectl delete -f https://raw.githubusercontent.com/aquasecurity/starboard/v0.12.0/deploy/static/06-starboard-operator.deployment.yaml \
+    ```
+     kubectl delete -f https://raw.githubusercontent.com/aquasecurity/starboard/v0.12.0/deploy/static/06-starboard-operator.deployment.yaml \
     -f https://raw.githubusercontent.com/aquasecurity/starboard/v0.12.0/deploy/static/05-starboard-operator.config.yaml \
     -f https://raw.githubusercontent.com/aquasecurity/starboard/v0.12.0/deploy/static/04-starboard-operator.clusterrolebinding.yaml \
     -f https://raw.githubusercontent.com/aquasecurity/starboard/v0.12.0/deploy/static/03-starboard-operator.clusterrole.yaml \
     -f https://raw.githubusercontent.com/aquasecurity/starboard/v0.12.0/deploy/static/02-starboard-operator.sa.yaml \
-    -f https://raw.githubusercontent.com/aquasecurity/starboard/v0.12.0/deploy/static/01-starboard-operator.ns.yaml`
+    -f https://raw.githubusercontent.com/aquasecurity/starboard/v0.12.0/deploy/static/01-starboard-operator.ns.yaml
+    ```
 
 8) **Scanning Workloads**
 
